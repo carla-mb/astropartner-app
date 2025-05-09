@@ -1,0 +1,22 @@
+<div class="planned-events">
+  <h2 class="title">UPCOMING EVENTS</h2>
+  <ng-container *ngIf="events && events.length > 0; else noEvents">
+    <div class="events-cards">
+      <mat-card class="event-card" *ngFor="let event of events">
+        <mat-card-header>
+          <mat-card-title>{{ event.title }}</mat-card-title>
+          <mat-card-subtitle>
+            From {{ event.start | date:'dd/MM/yyyy' }} to {{ event.end | date:'dd/MM/yyyy' }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="updateEvent(event)">Edit</button>
+          <button mat-raised-button color="warn" (click)="deleteEvent(event)">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #noEvents>
+    <p>No plans yet...</p>
+  </ng-template>
+</div>

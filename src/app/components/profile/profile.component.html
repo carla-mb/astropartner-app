@@ -1,0 +1,26 @@
+<div class="profile-container">
+  <h1 class="profile-title">Profile</h1>
+
+  <div class="top-wrapper">
+    <div class="card-section">
+      <app-profile-card [user]="user"></app-profile-card>
+      <div class="actions" [class.menu-open]="isMenuOpen">
+        <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+        <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+      </div>
+    </div>
+    
+    <div class="calendar-section">
+      <div class="section-icon">
+        <img src="/assets/images/icons/calendar.png" alt="Calendar icon" />
+      </div>
+      <div class="section-details">
+        <h2>Calendar</h2>
+        <p>See your plans for this month.</p>
+        <button mat-flat-button color="primary" (click)="goToCalendar()">Go to Calendar</button>
+      </div>
+    </div>
+  </div>
+
+  <app-recent-activity [userId]="userId"></app-recent-activity>
+</div>

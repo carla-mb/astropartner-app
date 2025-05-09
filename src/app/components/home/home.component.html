@@ -1,0 +1,31 @@
+<div class="home-page">
+  <ng-container *ngIf="isAuthenticated">
+    <app-horoscope [user]="currentUser"></app-horoscope>
+  </ng-container> 
+
+  <div *ngIf="!isAuthenticated" class="not-logged-in">
+    <p>Please <a routerLink="/login">log in</a> to see your horoscope and personalized details.</p>
+  </div>
+  
+    <div class="navigation-cards">
+      <div class="navigation-card" routerLink="/profile">
+        <img src="/assets/images/icons/avatar.png" alt="Profile Icon" />
+        <h2>Profile</h2>
+        <p>Manage your profile and see your activity</p>
+      </div>
+      <div class="navigation-card" routerLink="/calendar">
+        <img src="/assets/images/icons/calendar.png" alt="Calendar Icon" />
+        <h2>Lunar & Personal Calendar</h2>
+        <p>Keep track of your upcoming events and moon phases</p>
+      </div>
+      <div class="navigation-card" routerLink="/forum">
+        <img src="/assets/images/icons/megaphone.png" alt="Forum Icon" />
+        <h2>Recent Posts</h2>
+        <p>Check out the latest posts in the forum</p>
+      </div>
+    </div>
+    
+    <app-moon></app-moon>
+  
+ 
+</div>

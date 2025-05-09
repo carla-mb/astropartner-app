@@ -1,0 +1,15 @@
+<mat-card class="profile-card">
+  <div class="profile-card-content">
+    <img
+      [src]="getUserAvatar(user?.zodiacSign)"
+      alt="Zodiac avatar"
+      class="avatar"
+    />
+    <div class="profile-details">
+      <h2>{{ user?.username | titlecase }}</h2>
+      <p>BIRTHDAY: {{ user?.birthDate | date:'dd/MM/yyyy' }}</p>
+      <p>{{ user?.zodiacSign | titlecase }}</p>
+      <p class="zodiac-range">Born between 18/02 and 19/03</p>
+    </div>
+  </div>
+</mat-card>

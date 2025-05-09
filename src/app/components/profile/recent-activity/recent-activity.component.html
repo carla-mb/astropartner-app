@@ -1,0 +1,32 @@
+<div class="recent-activity-section">
+  <h2>Recent Activity</h2>
+  <div class="activity-header">
+    <img src="/assets/images/icons/megaphone.png" alt="Megaphone icon" class="megaphone-icon" />
+    <span>Forum</span>
+  </div>
+
+  <!-- List of recent posts -->
+  <div *ngIf="posts && posts.length > 0; else noPosts">
+    <div *ngFor="let post of posts" class="activity-post" appearance="outlined">
+      <div class="card-content">
+        <div class="post-content">
+          <div class="post-header">
+            <span class="post-title">{{ post.postTitle }}</span>
+            <span class="post-date">{{ post.postDate | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <p class="post-description">
+            {{ post.postContent | slice:0:150 }}
+            <span *ngIf="post.postContent.length > 150">...</span>
+          </p>
+          <div class="post-comments">
+            <span class="comment-count">{{ getCommentCount(post) }} Comments</span>
+          </div>
+          <button mat-flat-button color="primary" (click)="viewPost(post.postId)">Go to post</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noPosts>
+    <p>No recent activity.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,35 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main container styles */
+#content-wrap {
+  flex: 1;
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  #content-wrap {
+    margin: 0 10%;
+  }
+}
+
+@media (min-width: 768px) {
+  #content-wrap {
+    margin: 0 12%;
+  }
+}
+
+@media (min-width: 992px) {
+  #content-wrap {
+    margin: 0 15%;
+  }
+}

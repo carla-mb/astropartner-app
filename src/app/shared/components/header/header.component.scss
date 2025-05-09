@@ -1,0 +1,52 @@
+/* Header styles */
+.header-toolbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  background: #9b2a9b;
+  background: radial-gradient(circle,rgba(155, 42, 155, 1) 0%, rgba(147, 87, 199, 1) 37%, rgba(83, 155, 237, 1) 100%);
+  position: relative; 
+
+  @media (max-width: 767px) {
+    position: sticky; 
+    top: 0; 
+  }
+}
+
+.menu-toggle {
+  position: absolute; 
+  left: 16px; 
+  top: 50%; 
+  transform: translateY(-50%);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); 
+  height: 40px; 
+  cursor: pointer;
+}
+
+.header-actions {
+  display: flex; 
+  align-items: center; 
+  margin-left: auto; 
+  gap: 16px;
+
+  button {
+    padding: 4px 8px; 
+    font-size: 0.8rem; 
+    width: auto; 
+    height: 32px; 
+    border-radius: 4px; 
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}

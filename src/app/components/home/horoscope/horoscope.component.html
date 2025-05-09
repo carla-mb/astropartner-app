@@ -1,0 +1,31 @@
+<div class="horoscope-container" *ngIf="user && horoscopeData">
+  <h2 class="greeting">Hello, {{ user.username }}!</h2>
+  
+  <div class="horoscope-content">
+    <p>
+      Dear {{ user.zodiacSign }}, here's today's horoscope:
+    </p>
+    <p>
+      {{ randomMessage }}
+    </p>
+  </div>
+  
+  <div class="separator"></div>
+  
+  <mat-card class="detail-card">
+    <div class="card-header">
+      <mat-card-title>Your sign in more detail</mat-card-title>
+      <img class="zodiac-icon" [src]="getUserAvatar(user.zodiacSign)" alt="{{ user.zodiacSign | titlecase }}" />
+    </div>
+    <mat-card-content>
+      <p><strong>DATES:</strong> {{ horoscopeData.dates }}</p>
+      <p><strong>ELEMENT:</strong> {{ horoscopeData.element }}</p>
+      <p><strong>RULING PLANET:</strong> {{ horoscopeData.rulingPlanet }}</p>
+      <div class="traits">
+        <div class="trait" *ngFor="let trait of horoscopeData.traits">
+          {{ trait }}
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

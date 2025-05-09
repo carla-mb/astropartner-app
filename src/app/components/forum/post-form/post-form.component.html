@@ -1,0 +1,31 @@
+<div class="post-form-wrapper">
+  <a mat-button class="return-link" (click)="goBack()">
+    <mat-icon aria-hidden="true">arrow_back</mat-icon>
+    <span>Return</span>
+  </a>
+
+  <div class="post-form-container">
+    <h2>{{ isEditMode ? 'Edit Post' : 'New Post' }}</h2>
+    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="postTitle" />
+        <mat-error *ngIf="postForm.get('postTitle')?.hasError('required')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Content</mat-label>
+        <textarea matInput formControlName="postContent" rows="5"></textarea>
+        <mat-error *ngIf="postForm.get('postContent')?.hasError('required')">
+          Content is required
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!postForm.valid">
+        {{ isEditMode ? 'Update Post' : 'Create Post' }}
+      </button>
+    </form>
+  </div>
+</div>

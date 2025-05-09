@@ -1,0 +1,47 @@
+.calendar-container {
+  margin: 0 20px;
+
+  // Hide buttons when opening mobile menu
+  :host-context(.menu-open) {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  .title {
+    padding-left: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background-color: rgb(229, 235, 235);
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    margin: 0 10px 20px;
+  }
+
+  p {
+    font-style: italic; 
+    color: #888;
+  }
+
+  a {
+    font-weight: bold;
+    text-decoration: none;
+    color: red;
+  }
+}
+
+// Fullcalendar button overrides
+::ng-deep button.fc-next-button.fc-button.fc-button-primary {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-left: 0.5rem;
+}
+::ng-deep button.fc-prev-button.fc-button.fc-button-primary {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-right: 0.5rem;
+}
+

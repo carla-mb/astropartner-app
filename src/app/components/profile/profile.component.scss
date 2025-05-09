@@ -1,0 +1,87 @@
+.profile-container {
+  margin: 0 20px;
+
+  // Hide buttons when opening mobile menu
+  :host-context(.menu-open) button {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  .profile-title {
+    padding-left: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background-color: rgb(229, 235, 235);
+  }
+}
+
+.top-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  /* Calendar section */
+  .calendar-section {
+    display: flex;
+    align-items: flex-start; 
+    padding: 1rem;
+    background-color: #f7f9fa;
+    border-radius: 8px;
+    margin: 2rem 3rem;
+
+    button {
+      margin-top: 1rem;
+    }
+
+    .section-icon {
+      margin-right: 1rem;
+      display: flex;
+      align-items: flex-start;
+
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .section-details {
+      flex: 1;
+
+      h2 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+
+      p {
+        margin: 0.3rem 0;
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .top-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; 
+    margin: 0 50px 0 0;
+  }
+  
+  .card-section {
+    flex: 0 0 60%; 
+    margin-bottom: 0; 
+  }
+  
+  .calendar-section {
+    flex: 0 0 28%;
+  }
+}

@@ -1,0 +1,85 @@
+.horoscope-container {
+  padding: 1rem;
+
+  .greeting {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.horoscope-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 10px;
+
+  p:first-child {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  p:last-child {
+    font-style: italic;
+    font-size: 1rem;
+  }
+}
+
+.separator {
+  border-bottom: 2px solid #ccc;
+  margin: 1rem auto;
+  max-width: 80%;
+}
+
+/* Details card */
+.detail-card {
+  margin: 1.5rem auto;
+  max-width: 500px;
+  text-align: left;
+  position: relative;
+  background-color: #9357c74d;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .card-header {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-top: 1.5rem;
+
+    mat-card-title {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .zodiac-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+
+  mat-card-content {
+    p {
+      margin-left: 2rem;
+    }
+
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      margin-left: 2rem;
+
+      .trait {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        background-color: #f9f9f9;
+        font-style: italic;
+      }
+    }
+  }
+}

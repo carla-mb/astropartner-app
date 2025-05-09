@@ -1,0 +1,51 @@
+<div class="forum-container">
+  <h1 class="forum-title">Forum</h1>
+  <div class="forum-body" [class.menu-open]="isMenuOpen">
+
+    <div class="aside">
+      <p class="forum-subtitle">Your space for astrological discussions</p>
+      <button *ngIf="isAuthenticated" mat-flat-button color="primary" (click)="createPost()">
+        Add a new post
+      </button>
+      <p *ngIf="!isAuthenticated" style="font-style: italic;">
+        You must be logged in to participate in the forum. Go to <a href="/login">Login</a>
+      </p>
+    </div>
+
+    <div class="posts-area">
+      <p class="recent-posts-title">
+        RECENT POSTS BY THE ASTROCOMMUNITY
+      </p>
+
+      <div class="posts-scroll">
+        <div *ngFor="let data of paginatedPosts">
+          <mat-card class="post-card" appearance="outlined">
+            <div class="card-content">
+              <img [src]="getUserAvatar(data.zodiacSign)" alt="Zodiac avatar" class="avatar" />
+              <div class="post-content">
+                <h3 class="post-title">{{ data.post.postTitle }}</h3>
+                <p class="post-subtitle">
+                  {{ data.post.postDate | date:'dd/MM/yyyy' }} By {{ data.username }}
+                </p>
+                <p class="post-description">
+                  {{ data.post.postContent | slice:0:150 }}
+                  <span *ngIf="data.post.postContent.length > 150">...</span>
+                </p>
+                <button mat-raised-button color="primary" (click)="viewPost(data.post.postId!)">
+                  Go to the post
+                </button>                
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+
+      <mat-paginator 
+        class="posts-paginator"
+        [length]="posts.length"
+        [pageSize]="pageSize"
+        (page)="onPaginate($event)">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

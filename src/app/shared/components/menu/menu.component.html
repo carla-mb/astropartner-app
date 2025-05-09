@@ -1,0 +1,56 @@
+<mat-sidenav-container>
+  <!-- Mobile menu -->
+  <mat-sidenav
+    mode="over"
+    [opened]="isOpen"
+    class="mobile-menu"
+    (closed)="menuClosed.emit()"
+  >
+    <div class="menu-header">
+      <img src="assets/images/letter-a.png" alt="AstroPartner Logo" class="menu-logo" />
+      <button mat-icon-button class="close-button" (click)="menuClosed.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <nav>
+      <ul>
+        <ng-container *ngFor="let item of menuItems">
+          <li *ngIf="item.path !== '/profile' || accessToken"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a [routerLink]="item.path" (click)="menuClosed.emit()">
+              {{ item.label }}
+            </a>
+          </li>
+        </ng-container>
+
+        <li class="mobile-auth-buttons">
+          <!-- Authenticated users -->
+          <button *ngIf="accessToken" mat-raised-button color="accent" (click)="logout()">Logout</button>
+
+          <!-- Not authenticated users -->
+          <ng-container *ngIf="!accessToken">
+            <a mat-raised-button color="accent" [routerLink]="'/login'" (click)="menuClosed.emit()">Login</a>
+            <a mat-raised-button color="primary" [routerLink]="'/register'" (click)="menuClosed.emit()">Register</a>
+          </ng-container>
+        </li>
+      </ul>
+    </nav>
+  </mat-sidenav>
+
+  <!-- Desktop menu -->
+  <mat-toolbar class="desktop-menu" *ngIf="isDesktop && !isOpen">
+    <ul class="menu-items">
+      <ng-container *ngFor="let item of menuItems">
+        <li *ngIf="item.path !== '/profile' || accessToken"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+          <a [routerLink]="item.path" (click)="menuClosed.emit()">
+            {{ item.label }}
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </mat-toolbar>
+</mat-sidenav-container>

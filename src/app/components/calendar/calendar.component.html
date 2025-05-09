@@ -1,0 +1,17 @@
+<div class="calendar-container">
+  <h1 class="title">Calendar</h1>
+  <p class="subtitle">
+    Personalize your lunar calendar with your own events.
+  </p>
+  
+  <div class="calendar-container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+    <ng-container *ngIf="!isAuthenticated">
+      <p>
+        (Calendar is view-only. Please <a routerLink="/login">Login</a> to add events.)
+      </p>
+    </ng-container>
+  </div>
+  
+  <app-planned-events></app-planned-events>
+</div>

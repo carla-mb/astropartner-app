@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ data.event ? 'Edit Event' : 'Add Event' }}</h2>
+<mat-dialog-content>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Event Title</mat-label>
+    <input matInput placeholder="Enter title" [(ngModel)]="eventData.title">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Start Date</mat-label>
+    <input matInput type="date" [(ngModel)]="startValue">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>End Date</mat-label>
+    <input matInput type="date" [(ngModel)]="endValue">
+  </mat-form-field>
+  
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onAddEvent()">
+    {{ data.event ? 'Update' : 'Add Event' }}
+  </button>
+</mat-dialog-actions>

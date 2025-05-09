@@ -1,0 +1,32 @@
+.moon-phase {
+  border: 2px dashed #888;
+  margin: 2rem auto;
+  max-width: 400px;
+  font-size: 1.2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f7f9fa, #e3e7ed);
+  border-radius: 12px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 50%; 
+    border: 2px solid #ccc; 
+    background-color: #d3e5ef; 
+  }
+
+  p {
+    font-size: 1.2rem; 
+    font-weight: bold;
+    color: #444;
+    margin: 0.5rem 0;
+  }
+}
