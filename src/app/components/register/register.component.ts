@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UserService } from '../../services/user.service';
 import { RouterModule, Router } from '@angular/router';
 import { UserDTO } from '../../models/user.dto';
-import { formatDateForAPI } from '../../utils/format-date.utils';
+import { formatDateForAPI } from '../../utils/date-formatting';
 
 @Component({
   selector: 'app-register',
@@ -49,10 +49,24 @@ export class RegisterComponent {
         ]
       ],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
       birthDate: ['', Validators.required],
-    });
+    }, { validators: this.passwordsMatch });
   }
-  
+
+  passwordsMatch(form: FormGroup): void {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+
+    if (!password || !confirmPassword) return;
+
+    if (confirmPassword.value !== password.value) {
+      confirmPassword.setErrors({ passwordMismatch: true });
+    } else {
+      confirmPassword.setErrors(null);
+    }
+  }
+
   onSubmit(): void {
     if (!this.registerForm.valid) return;
     
@@ -86,5 +100,17 @@ export class RegisterComponent {
   // Navigate to the previous page
   goBack(): void {
     this.location.back(); 
+  }
+
+  // Password field visibility
+  showPassword = false;
+  showConfirmPassword = false;
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

@@ -9,7 +9,7 @@
     <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username" (input)="forceLowercase($event)" />
+        <input matInput formControlName="username" (input)="forceLowercase($event)">
         <mat-error *ngIf="editForm.get('username')?.hasError('required')">
           Username is required
         </mat-error>
@@ -23,21 +23,10 @@
           Username already exists
         </mat-error>
       </mat-form-field>
-      
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" />
-        <mat-error *ngIf="editForm.get('password')?.hasError('required')">
-          Password is required
-        </mat-error>
-        <mat-error *ngIf="editForm.get('password')?.hasError('minlength')">
-          Password must be at least 6 characters long
-        </mat-error>
-      </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Birth Date</mat-label>
-        <input matInput formControlName="birthDate" [matDatepicker]="picker" />
+        <input matInput formControlName="birthDate" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="editForm.get('birthDate')?.hasError('required')">
@@ -45,7 +34,7 @@
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!editForm.valid">
+      <button mat-raised-button type="submit" [disabled]="!editForm.valid">
         Save Changes
       </button>
     </form>

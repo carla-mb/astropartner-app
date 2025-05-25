@@ -7,7 +7,7 @@
     (closed)="menuClosed.emit()"
   >
     <div class="menu-header">
-      <img src="assets/images/letter-a.png" alt="AstroPartner Logo" class="menu-logo" />
+      <img src="assets/logo/logo-light-bg.png" alt="AstroPartner Logo" class="menu-logo">
       <button mat-icon-button class="close-button" (click)="menuClosed.emit()">
         <mat-icon>close</mat-icon>
       </button>
@@ -16,7 +16,7 @@
     <nav>
       <ul>
         <ng-container *ngFor="let item of menuItems">
-          <li *ngIf="item.path !== '/profile' || accessToken"
+          <li *ngIf="item.path !== '/profile' || isAuthenticated"
               routerLinkActive="active"
               [routerLinkActiveOptions]="{ exact: true }">
             <a [routerLink]="item.path" (click)="menuClosed.emit()">
@@ -26,13 +26,10 @@
         </ng-container>
 
         <li class="mobile-auth-buttons">
-          <!-- Authenticated users -->
-          <button *ngIf="accessToken" mat-raised-button color="accent" (click)="logout()">Logout</button>
-
-          <!-- Not authenticated users -->
-          <ng-container *ngIf="!accessToken">
-            <a mat-raised-button color="accent" [routerLink]="'/login'" (click)="menuClosed.emit()">Login</a>
-            <a mat-raised-button color="primary" [routerLink]="'/register'" (click)="menuClosed.emit()">Register</a>
+          <button *ngIf="isAuthenticated" mat-raised-button (click)="logout()">Logout</button>
+          <ng-container *ngIf="!isAuthenticated">
+            <button mat-raised-button [routerLink]="'/login'" (click)="menuClosed.emit()">Login</button>
+            <button mat-raised-button [routerLink]="'/register'" (click)="menuClosed.emit()">Register</button>
           </ng-container>
         </li>
       </ul>
@@ -43,7 +40,7 @@
   <mat-toolbar class="desktop-menu" *ngIf="isDesktop && !isOpen">
     <ul class="menu-items">
       <ng-container *ngFor="let item of menuItems">
-        <li *ngIf="item.path !== '/profile' || accessToken"
+        <li *ngIf="item.path !== '/profile' || isAuthenticated"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }">
           <a [routerLink]="item.path" (click)="menuClosed.emit()">

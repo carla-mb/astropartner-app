@@ -1,7 +1,7 @@
 <div class="recent-activity-section">
   <h2>Recent Activity</h2>
   <div class="activity-header">
-    <img src="/assets/images/icons/megaphone.png" alt="Megaphone icon" class="megaphone-icon" />
+    <img src="/assets/images/icons/megaphone.png" alt="Megaphone icon" class="megaphone-icon">
     <span>Forum</span>
   </div>
 
@@ -15,18 +15,24 @@
             <span class="post-date">{{ post.postDate | date:'dd/MM/yyyy' }}</span>
           </div>
           <p class="post-description">
-            {{ post.postContent | slice:0:150 }}
-            <span *ngIf="post.postContent.length > 150">...</span>
+            {{ post.postContent | slice:0:80 }}
+            <span *ngIf="post.postContent.length > 80">...</span>
           </p>
           <div class="post-comments">
             <span class="comment-count">{{ getCommentCount(post) }} Comments</span>
           </div>
-          <button mat-flat-button color="primary" (click)="viewPost(post.postId)">Go to post</button>
+          <div class="post-button">
+            <button mat-raised-button (click)="viewPost(post.postId)">
+              <mat-icon>explore</mat-icon>
+              Go to the post
+            </button>
+          </div>
+          
         </div>
       </div>
     </div>
   </div>
   <ng-template #noPosts>
-    <p>No recent activity.</p>
+    <p class="no-activity">No recent activity.</p>
   </ng-template>
 </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { MoonService } from '../../../services/moon.service';
 import { CommonModule } from '@angular/common';
+import { phaseToEmoji } from '../../../utils/moon-utils';
 
 @Component({
   selector: 'app-moon',
@@ -8,8 +9,27 @@ import { CommonModule } from '@angular/common';
   templateUrl: './moon.component.html',
   styleUrl: './moon.component.scss'
 })
-export class MoonComponent implements OnInit {
+export class MoonComponent implements OnInit, AfterViewInit, OnDestroy {
+  // Access the moon container DOM element
+  @ViewChild('moonContainer') moonContainer!: ElementRef;
+
   currentMoonPhase: string = '';
+  emoji!: string;
+  moonImages: string[] = [
+    'assets/images/moon-phases/new-moon.png',      
+    'assets/images/moon-phases/growing-25.png',    
+    'assets/images/moon-phases/growing-50.png',    
+    'assets/images/moon-phases/growing-75.png',    
+    'assets/images/moon-phases/full-moon.png',     
+    'assets/images/moon-phases/decreasing-75.png', 
+    'assets/images/moon-phases/decreasing-50.png', 
+    'assets/images/moon-phases/decreasing-25.png' 
+  ];
+  currentImageIndex: number = 0;
+  animationInterval: any;
+
+  // Track if moon element is in view
+  moonObserver!: IntersectionObserver;
 
   constructor(private moonService: MoonService) {}
 
@@ -17,22 +37,40 @@ export class MoonComponent implements OnInit {
     this.fetchCurrentMoonPhase();
   }
 
-  // Extract today's moon phase
+  // Start/stop animation when at least 10% of element is visible
+  ngAfterViewInit(): void {
+    this.moonObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        this.startMoonAnimation();
+      } else {
+        this.stopMoonAnimation();
+      }
+    }, { threshold: 0.1 });
+
+    if (this.moonContainer) {
+      this.moonObserver.observe(this.moonContainer.nativeElement);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.stopMoonAnimation();
+    this.moonObserver.unobserve(this.moonContainer.nativeElement);
+  }
+
+  // Load today's moon phase from cache or backend
   fetchCurrentMoonPhase(): void {
-    const cachedMoonPhase = localStorage.getItem('moonPhase');
+    const cachedMoonPhase = localStorage.getItem('cachedMoons');
     const cachedDate = localStorage.getItem('cachedDate');
     const today = new Date().toDateString();
 
-    // If available, use cached data otherwise fetch from backend
     if (cachedMoonPhase && cachedDate === today) {
-      this.currentMoonPhase = cachedMoonPhase;
+      const phaseNumbers: number[] = JSON.parse(cachedMoonPhase);
+      this.updateMoonPhase(phaseNumbers[0]);
     } else {
-      this.moonService.getMoonPhases().subscribe(
+      this.moonService.getTodayPhase().subscribe(
         (response) => {
           const todayMoonPhase = response.days[0].moonphase;
-          this.currentMoonPhase = this.getMoonPhaseLabel(todayMoonPhase);
-          localStorage.setItem('moonPhase', this.currentMoonPhase);
-          localStorage.setItem('cachedDate', today); 
+          this.updateMoonPhase(todayMoonPhase);
         },
         (err) => {
           console.error('Error fetching moon phase:', err);
@@ -42,15 +80,27 @@ export class MoonComponent implements OnInit {
     }
   }
 
-  getMoonPhaseLabel(phase: number): string {
-    if (phase === 0) return 'New Moon';
-    else if (phase > 0 && phase < 0.25) return 'Waxing Crescent';
-    else if (phase === 0.25) return 'First Quarter';
-    else if (phase > 0.25 && phase < 0.5) return 'Waxing Gibbous';
-    else if (phase === 0.5) return 'Full Moon';
-    else if (phase > 0.5 && phase < 0.75) return 'Waning Gibbous';
-    else if (phase === 0.75) return 'Last Quarter';
-    else if (phase > 0.75 && phase < 1) return 'Waning Crescent';
-    else return 'Unknown';
-  }  
+  private updateMoonPhase(phaseNumber: number): void {
+    this.currentMoonPhase = this.moonService.getMoonPhaseLabel(phaseNumber);
+    this.emoji = phaseToEmoji(this.currentMoonPhase);
+  }
+
+  startMoonAnimation(): void {
+    if (!this.animationInterval) {
+      this.animationInterval = setInterval(() => {
+        this.currentImageIndex = (this.currentImageIndex + 1) % this.moonImages.length;
+      }, 1000);
+    }
+  }
+
+  stopMoonAnimation(): void {
+    if (this.animationInterval) {
+      clearInterval(this.animationInterval);
+      this.animationInterval = null;
+    }
+  }
+
+  get currentMoonImage(): string {
+    return this.moonImages[this.currentImageIndex];
+  }
 }

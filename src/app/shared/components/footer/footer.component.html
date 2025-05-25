@@ -1,5 +1,25 @@
 <footer>
-  <p>WIP</p>
-  <p>For educational purposes only.</p>
-  <span>© 2025 AstroPartner</span>
+  <div class="footer-content">
+    <div class="footer-nav">
+      <ul>
+        <li *ngIf="isAuthenticated">
+          <a routerLink="/profile">Profile</a>
+        </li>
+        <li>
+          <a routerLink="/calendar">Calendar</a>
+        </li>
+        <li>
+          <a routerLink="/forum">Forum</a>
+        </li>
+        <li>
+          <a routerLink="/about">About AstroPartner</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-info">
+      <p>For educational purposes only.</p>
+      <span>© 2025 AstroPartner</span>
+    </div>
+  </div>
 </footer>

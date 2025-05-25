@@ -1,15 +1,20 @@
-<mat-card class="profile-card">
+<mat-card class="profile-card" [ngStyle]="{ 'background-image': 'url(' + getUserAvatar(user?.zodiacSign) + ')' }">
   <div class="profile-card-content">
-    <img
-      [src]="getUserAvatar(user?.zodiacSign)"
-      alt="Zodiac avatar"
-      class="avatar"
-    />
     <div class="profile-details">
-      <h2>{{ user?.username | titlecase }}</h2>
+      <h2>{{ user?.username }}</h2>
       <p>BIRTHDAY: {{ user?.birthDate | date:'dd/MM/yyyy' }}</p>
       <p>{{ user?.zodiacSign | titlecase }}</p>
-      <p class="zodiac-range">Born between 18/02 and 19/03</p>
+      <p class="zodiac-range">{{ getZodiacRange(user?.zodiacSign) }}</p>
+    </div>
+
+    <div class="owner-options">
+      <button mat-flat-button [matMenuTriggerFor]="ownerMenu">
+        <mat-icon>more_vert</mat-icon> Options
+      </button>
+      <mat-menu #ownerMenu="matMenu">
+        <button mat-menu-item (click)="onEditProfile()">Edit Profile</button>
+        <button mat-menu-item (click)="onEditPassword()">Change Password</button>
+      </mat-menu>
     </div>
   </div>
 </mat-card>

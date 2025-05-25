@@ -5,13 +5,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { PostDTO } from '../../../models/post.dto';
 import { PostService } from '../../../services/post.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-recent-activity',
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIcon
   ],
   templateUrl: './recent-activity.component.html',
   styleUrl: './recent-activity.component.scss'
@@ -31,11 +33,14 @@ export class RecentActivityComponent implements OnInit {
     }
   }
 
+  // Load only 4 more recent
   loadPosts(): void {
     this.postService.getPostsByUserId(this.userId).subscribe({
       next: (posts: PostDTO[]) => {
-        this.posts = posts.reverse();
-        // Recover and count how many comments the post has
+        this.posts = posts
+          .sort((a, b) => new Date(b.postDate).getTime() - new Date(a.postDate).getTime())
+          .slice(0, 4);
+        // Recover and count how many comments each post has
         this.posts.forEach(post => {
           this.postService.getCommentsByPostId(post.postId!).subscribe({
             next: (comments) => {

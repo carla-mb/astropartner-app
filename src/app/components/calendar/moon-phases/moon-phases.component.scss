@@ -1,0 +1,90 @@
+.moon-calendar {
+  max-width: 100%;
+  margin-top: 15px;
+
+  h2 {
+    font-size: 1.3rem;
+    margin: 0
+  }
+}
+
+.scroll-container {
+  overflow-x: auto;
+  padding-bottom: 8px; 
+  margin: 0 10px;
+}
+
+.week-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.day-cell {
+  padding: 0.3rem;
+  background: linear-gradient(145deg, rgba(185, 85, 185, 0.2), rgba(24, 24, 36, 0.07));
+  border: 1px solid rgba(120, 30, 160, 0.2);
+  border-radius: 10px;
+
+  font-size: 0.85rem;
+}
+
+.date-label {
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.emoji {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+@media (min-width: 576px) {
+  .scroll-container {
+    margin: 0 20px;
+  }
+
+  .week-row {
+    min-width: auto;
+  }
+
+  .day-cell {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .date-label {
+    font-size: 0.9rem;
+  }
+
+  .emoji {
+    font-size: 1.3rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .moon-calendar {
+    margin-top: 25px;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+
+    .scroll-container {
+      margin: 0;
+    }
+  }
+
+  .week-row {
+    gap: 0.3rem;
+    margin-bottom: 0.3rem;
+  }
+}
+

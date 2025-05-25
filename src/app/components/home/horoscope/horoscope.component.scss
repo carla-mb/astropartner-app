@@ -1,68 +1,140 @@
 .horoscope-container {
-  padding: 1rem;
+  padding: 0 1rem;
 
   .greeting {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: 768px) {
+      font-size: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 2.2rem;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 2.3rem;
+    }
   }
-}
 
-.horoscope-content {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-  padding-top: 10px;
-
-  p:first-child {
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    margin-bottom: 0.3rem;
+  .user-sign {
+    color: rgba(187, 19, 205, 1);
   }
 
-  p:last-child {
-    font-style: italic;
-    font-size: 1rem;
-  }
-}
+  .horoscope-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+    padding-top: 10px;
 
-.separator {
-  border-bottom: 2px solid #ccc;
-  margin: 1rem auto;
-  max-width: 80%;
+    p:first-child {
+      text-transform: uppercase;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    p:last-child {
+      font-style: italic;
+      font-size: 1rem;
+    }
+    
+    @media (min-width: 768px) {
+      p:first-child {
+        font-size: 1.3rem;
+      }
+
+      p:last-child {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      p:first-child {
+        font-size: 1.5rem;
+      }
+
+      p:last-child {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      p:first-child {
+        font-size: 1.6rem;
+      }
+
+      p:last-child {
+        font-size: 1.3rem;
+      }
+    }
+  }
+
+  .separator {
+    border-bottom: 2px solid #ccc;
+    margin: 2rem auto;
+    max-width: 80%;
+  }
 }
 
 /* Details card */
 .detail-card {
   margin: 1.5rem auto;
-  max-width: 500px;
+  max-width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
   text-align: left;
   position: relative;
-  background-color: #9357c74d;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(147, 87, 199, 0.2), rgba(83, 155, 237, 0.1));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 
   .card-header {
     display: flex;
     justify-content:space-around;
     align-items: center;
     margin-bottom: 0.5rem;
-    padding-top: 1.5rem;
+    padding: 1.5rem 1rem 1rem 1rem;
+    background: rgba(255, 255, 255, 0.5);
 
     mat-card-title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin: 0;
+      color: #333;
+      font-weight: 600;
     }
 
     .zodiac-icon {
       width: 40px;
-      height: 40px;
+      height: auto;
       object-fit: contain;
+    }
+
+    @media (min-width: 576px) {
+      mat-card-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      mat-card-title {
+        font-size: 1.7rem;
+      }
+
+      .zodiac-icon {
+        width: 50px;
+      }
     }
   }
 
   mat-card-content {
+    padding: 1rem;
+    color: #333;
+    
     p {
       margin-left: 2rem;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
     }
 
     .traits {
@@ -70,6 +142,7 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.5rem;
+      margin-top: 1rem;
       margin-left: 2rem;
 
       .trait {
@@ -77,9 +150,37 @@
         border-radius: 8px;
         padding: 0.3rem 0.6rem;
         font-size: 0.8rem;
-        background-color: #f9f9f9;
+        border-radius: 12px;
+        color: #333;
+        background-color: rgba(83, 155, 237, 0.1);
         font-style: italic;
       }
+    }
+
+    @media (min-width: 576px) {
+      p {
+        font-size: 1rem;
+      }
+
+      .traits .trait {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding-left: 2rem;
+
+      p {
+        font-size: 1.1rem;
+      }
+
+      .traits .trait {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      padding-left: 4rem;
     }
   }
 }

@@ -1,42 +1,44 @@
 .forum-container {
-  margin: 0 20px;
+  margin: 0 20px 50px;
 
-  // Hide buttons when opening mobile menu
-  :host-context(.menu-open) button {
-    pointer-events: none;
-    opacity: 0.3;
+  @media (min-width: 768px) {
+    margin: 0 0 50px;
   }
-}
 
-.forum-title {
-  padding-left: 20px;
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 20px 0;
-  background-color: rgb(229, 235, 235);
+  .forum-title {
+    padding-left: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background: linear-gradient(to right,rgba(225, 232, 240, 0.9),rgba(205, 220, 240, 0.7));
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+
+    @media (min-width: 992px) {
+      font-size: 2rem;
+    }
+  }
 }
 
 .aside {
   margin: 0 10px;
 
   .forum-subtitle {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 20px;
-  }
-
-  a {
-    font-weight: bold;
-    text-decoration: none;
-    color: red;
   }
 
   button {
     border-radius: 5px;
   }
+
+  .prompt {
+    font-size: 0.9rem;
+  }
 }
 
 .recent-posts-title {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   margin: 30px 10px;
 }
 
@@ -49,13 +51,26 @@
 
 /* Card styles */
 .post-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 20px auto;
+  position: relative;
+  margin: 15px 0;
   padding: 20px;
+  padding-left: 30px; 
   width: 95%; 
   box-sizing: border-box;
+  background: linear-gradient(to bottom,  #f0ebff 20%, #ffffff 80%);
+  border-radius: 8px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background: #A67CBF;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
 
   @media (min-width: 767px) {
     max-width: 600px;
@@ -77,7 +92,7 @@
     border-radius: 50%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     object-fit: cover;
-    background-color: #f5f5f5;
+    background-color: rgba(83, 155, 237, 0.1);
     margin-right: 20px;
     align-self: flex-start;
   }
@@ -87,7 +102,7 @@
     text-align: left;
   
     .post-title {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: bold;
       margin: 0 0 10px;
     }
@@ -99,57 +114,99 @@
     }
     
     .post-description {
-      font-size: 1rem;
+      font-size: 0.8rem;
       margin: 0 0 15px;
     }
 
-    button {
-      margin-top: 10px;
+    .comment-count {
+      color: #A67CBF;
+      font-weight: bold;
+      font-size: 0.9rem;
+
+      .comment-icon {
+        font-size: 20px;
+        vertical-align: middle;
+      }
     }
 
+    button {
+      font-size: 0.8rem;
+    }
+
+    @media (min-width: 576px) {
+      .post-description {
+        font-size: 0.9rem;
+      }
+    }
+    
     @media (min-width: 768px) {
       .post-title {
-        font-size: 1.4rem;
+        font-size: 1rem;
       }
     
       .post-subtitle {
         font-size: 1rem;
-  
       }
       
       .post-description {
-        font-size: 1.2rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .comment-count {
+        font-size: 1rem;
+      }
+
+      button {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .post-title {
+        font-size: 1.4rem;
+      }
+    
+      .post-description {
+        font-size: 1.1rem;
       }
     }
   }
 }
 
 mat-paginator {
-  margin-top: 20px;
   background-color: #ffffff;
 }
 
-/* Desktop styles */
 @media (min-width: 992px) {
   .forum-body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 20px;
   }
   
-  /* Left column: Aside */
+  /* Left column */
   .aside {
     flex: 0 0 30%;
     margin: 0;
+
+    .forum-subtitle {
+      font-size: 1.1rem;
+    }
   }
   
-  /* Right column: Posts area */
+  /* Right column */
   .posts-area {
     flex: 1;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    margin: 0 20px 0 30px;
+
+    .recent-posts-title {
+      margin: 75px 0 10px;
+      font-size: 1.5rem;
+    }
   }
   
   /* Scrollable container for posts */
@@ -157,7 +214,7 @@ mat-paginator {
     flex: 1;
     overflow-y: scroll;
     max-height: calc(100vh - 250px); 
-    padding-right: 10px; 
+    width: 100%;
     scrollbar-gutter: stable; 
   }
   

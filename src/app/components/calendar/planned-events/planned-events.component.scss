@@ -1,51 +1,137 @@
 .planned-events {
-  padding: 0.5rem 1rem 3rem;
+  padding: 0.5rem 0 3rem;
 
   .title {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
   }
 
-  .events-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+  .table-wrapper {
+    padding: 0;
+  }
 
-    .event-card {
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease-in-out;
-      
-      &:hover {
-        transform: translateY(-2px);
+  .no-events {
+    font-size: 0.9rem;
+  }
+}
+
+.events-table {
+  width: 100%;
+  margin: 0 auto;
+  border: 3px solid #9B2A9B;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+
+  .mat-mdc-row{
+    height: 10px;
+  }
+
+  .mat-mdc-row:not(:last-of-type) .event-cell {
+    border-bottom: 1px solid #9B2A9B;
+  }
+
+  .event-color {
+    padding: 0 10px;
+  }
+
+  .event-title {
+    font-size: 0.8rem;
+    padding: 0 6px;
+  }
+
+  .event-date {
+    color: #666;
+    font-size: 0.75rem;
+    padding: 0 8px;
+  }
+
+  .action-cell {
+    padding: 0;
+  }
+
+  .manage-icon mat-icon {
+    font-size: 1rem;
+    padding: 0;
+    vertical-align: middle;
+    margin-bottom: 8px;
+  }
+
+  .mat-header-row,
+  .mat-header-cell {
+    display: none;
+  }
+}
+
+@media (min-width: 576px) {
+  .event-title {
+    font-size: 0.85rem;
+    padding: 0 6px;
+  }
+
+  .event-date {
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .table-wrapper {
+    width: 60%;
+  }
+
+  .events-table {
+    .event-color {
+      padding: 0 10px;
+    }
+
+    .event-title {
+      font-size: 0.7rem;
+      padding: 0 10px;
+    }
+
+    .event-date {
+      font-size: 0.7rem;
+      padding: 0 8px;
+    }
+
+    .manage-icon mat-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .planned-events {
+    .title {
+      font-size: 1.5rem;
+    }
+
+    .no-events {
+      font-size: 1rem;
+    }
+  }
+  
+  .table-wrapper {
+    width: 65%;
+
+    .events-table {
+      .event-color {
+        padding: 0 10px;
       }
 
-      @media (min-width: 768px) {
-        width: 40%;
+      .event-title {
+        font-size: 1rem;
+        padding: 0 7px;
+      }
+
+      .event-date {
+        font-size: 1rem;
+        padding: 0 5px;
+      }
+
+      .manage-icon mat-icon {
+        font-size: 1.2rem;
       }
     }
   }
-
-  mat-card-header {
-    padding-bottom: 0.5rem;
-  }
-
-  mat-card-title {
-    font-weight: bold;
-  }
-
-  mat-card-subtitle {
-    font-size: 0.9rem;
-    color: #757575; 
-  }
-
-  mat-card-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0.5rem;
-    gap: 0.5rem; 
-  }
-}
+} 

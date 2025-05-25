@@ -3,7 +3,7 @@
   
   <div class="horoscope-content">
     <p>
-      Dear {{ user.zodiacSign }}, here's today's horoscope:
+      Dear <span class="user-sign">{{ user.zodiacSign }}</span>, here's today's horoscope:
     </p>
     <p>
       {{ randomMessage }}
@@ -15,7 +15,7 @@
   <mat-card class="detail-card">
     <div class="card-header">
       <mat-card-title>Your sign in more detail</mat-card-title>
-      <img class="zodiac-icon" [src]="getUserAvatar(user.zodiacSign)" alt="{{ user.zodiacSign | titlecase }}" />
+      <img class="zodiac-icon" [src]="getUserAvatar(user.zodiacSign)" alt="User avatar">
     </div>
     <mat-card-content>
       <p><strong>DATES:</strong> {{ horoscopeData.dates }}</p>

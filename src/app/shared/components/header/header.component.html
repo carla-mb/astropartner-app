@@ -1,15 +1,13 @@
-<mat-toolbar color="primary" class="header-toolbar">
-
+<mat-toolbar class="header-toolbar">
   <button mat-icon-button class="menu-toggle" (click)="toggleMenu()">
     <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
   </button>
-
-  <img src="assets/images/letter-a.png" alt="AstroPartner Logo" class="header-logo" [routerLink]="'/home'"/>
+  <img src="assets/logo/logo-def.png" alt="AstroPartner Logo" class="header-logo" [routerLink]="'/home'">
   <div class="header-actions" *ngIf="isDesktop">
-    <button *ngIf="accessToken" mat-raised-button color="accent" (click)="logout()">Logout</button>
-    <ng-container *ngIf="!accessToken">
-      <button mat-raised-button color="accent" [routerLink]="'/login'">Login</button>
-      <button mat-raised-button color="primary" [routerLink]="'/register'">Register</button>
+    <button *ngIf="isAuthenticated" mat-raised-button (click)="logout()">Logout</button>
+    <ng-container *ngIf="!isAuthenticated">
+      <button mat-raised-button [routerLink]="'/login'">Login</button>
+      <button mat-raised-button [routerLink]="'/register'">Register</button>
     </ng-container>
   </div>
 </mat-toolbar>

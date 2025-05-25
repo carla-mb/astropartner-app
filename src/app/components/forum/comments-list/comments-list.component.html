@@ -1,0 +1,56 @@
+<div class="comment-form-section">
+  <ng-container *ngIf="isAuthenticated; else loginPrompt">
+    <mat-form-field appearance="outline" class="comment-input">
+      <mat-label>Add a comment</mat-label>
+      <textarea matInput rows="3" [(ngModel)]="commentContent"></textarea>
+    </mat-form-field>
+    <div class="comment-form-actions">
+      <button mat-raised-button (click)="submitComment()">COMMENT</button>
+      <button mat-button (click)="cancelComment()">CANCEL</button>
+    </div>
+  </ng-container>
+  <ng-template #loginPrompt>
+    <p>
+      Please <a href="/login" class="main-link">Login</a> to participate in the discussion.
+    </p>
+  </ng-template>
+</div>
+
+<div class="comments-list">
+  <div *ngFor="let commentData of comments" class="comment-card">
+    <img class="comment-avatar" [src]="getUserAvatar(commentData.zodiacSign)" alt="User avatar">
+    <div class="comment-content">
+      <div class="comment-top">
+        <span class="comment-username">{{ commentData.username }}</span>
+        <span class="comment-date">
+          {{ commentData.comment.commentDate | date:'d/M/yyyy, H:mm' }} 
+        </span>
+      </div>
+
+    <!-- Show textarea when editing -->
+    <ng-container *ngIf="isEditMode === commentData.comment.commentId; else normalCommentView">
+      <mat-form-field appearance="outline" class="edit-comment-input">
+        <mat-label>Edit Comment</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="editedCommentContent"></textarea>
+      </mat-form-field>
+      <div class="edit-comment-actions">
+        <button mat-button (click)="cancelEdit()">Cancel</button>
+        <button mat-raised-button (click)="saveEditedComment(commentData.comment.commentId!)">Save</button>
+      </div>
+    </ng-container>
+
+      <!-- Normal comment view (when not editing) -->
+      <ng-template #normalCommentView>
+        <p class="comment-text">{{ commentData.comment.commentContent }}</p>      
+      </ng-template>      
+    </div>
+    <div *ngIf="isAuthenticated && commentData.comment.userId === currentUserId && isEditMode !== commentData.comment.commentId" class="comment-options">
+      <button mat-icon-button class="comment-action-btn" matTooltip="Edit comment" aria-label="Edit comment" (click)="editComment(commentData.comment.commentId!)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button class="comment-action-btn" matTooltip="Delete comment" aria-label="Delete comment" (click)="deleteComment(commentData.comment.commentId!)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>  
+  </div>
+</div>

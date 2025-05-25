@@ -1,27 +1,53 @@
 /* Container for the post detail view */
 .post-detail-container {
-  margin: 20px;
+  margin: 20px 20px 50px;
 
-  // Hide buttons when opening mobile menu
-  :host-context(.menu-open) button {
-    pointer-events: none;
-    opacity: 0;
+  @media (min-width: 768px) {
+    margin: 20px 0 50px;
   }
 }
 
 .post-title {
-  font-size: 1.6rem;
-  margin: 0 20px 30px;
+  font-size: 1.2rem;
+  margin: 0 40px 20px;
+
+    @media (min-width: 768px) {
+      font-size: 1.3rem;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 1.4rem;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 1.7rem;
+    }
 }
 
 /* Post Card */
 .post-card {
+  position: relative;
   margin: 0 20px 20px;
-  padding: 20px 10px;
+  padding: 20px 10px 20px 25px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom,  #f0ebff 20%, #ffffff 80%);
+  border-radius: 8px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background: #A67CBF;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
 
   .post-card-content {
     display: flex;
-    gap: 20px;
+    gap: 10px;
   }
 }
 
@@ -29,6 +55,9 @@
 .post-left {
   flex: 0 0 15%;
   text-align: center;
+  display: flex;              
+  flex-direction: column;     
+  align-items: center;
 
   .post-username {
     font-weight: bold;
@@ -50,9 +79,23 @@
     border-radius: 50%;
     object-fit: cover;
     margin: auto;
+    border: 3px solid #fff;   
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    background-color: rgba(83, 155, 237, 0.1);    
+    margin-bottom: 20px;
   }
 
   @media (min-width: 768px) {
+    .post-username {
+      font-size: 1.2rem;
+    }
+  
+    .post-date {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
     .post-username {
       font-size: 1.4rem;
     }
@@ -64,13 +107,28 @@
 
   /* Options style */
   .owner-options {
-    margin-top: 15px;
+    margin-top: auto;
     text-align: center;
     position: relative;  
 
     button[mat-flat-button] {
       padding: 4px 8px;
       font-size: 0.8rem;
+
+      mat-icon {
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        padding-left: 5px;
+      }
+
+      @media (min-width: 992px) {
+        font-size: 0.95rem;
+
+        mat-icon {
+          font-size: 0.9rem;
+        }
+      }
     }
   }
 }
@@ -82,130 +140,17 @@
   .post-content {
     font-size: 0.8rem;
     line-height: 1.6;
-  
+
+    @media (min-width: 576px) {
+      font-size: 0.9rem;
+    }
+
     @media (min-width: 768px) {
-      font-size: 1.2rem;
-    }
-  }
-}
-
-/* Comment form */
-.comment-form-section {
-  margin: 20px;
-
-  p {
-    font-style: italic;
-    font-size: 0.85rem;
-  }
-
-  a {
-    font-weight: bold;
-    text-decoration: none;
-    color: red;
-  }
-
-  .comment-input mat-label {
-    font-size: 0.85rem;
-  }
-
-  .comment-input {
-    width: 100%;
-  }  
-
-  .comment-form-actions {
-    text-align: right;
-    padding-bottom: 15px;
-  
-    button {
-      font-size: 0.7rem;
-      padding: 5px;
-      margin-left: 10px ;
-    }
-  }
-
-  @media (min-width: 768px) {
-    p {
       font-size: 1rem;
     }
-
-    .comment-input mat-label {
-      font-size: 0.95rem;
-    }
-  }
-}
-
-/* Comments list */
-.comments-list {
-  margin: 20px;
-
-  .comment-card {
-    display: flex;
-    align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
-    position: relative; 
-    padding-bottom: 30px; 
-
-    .comment-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-right: 15px;
-    }
-    
-    .comment-content {
-      flex: 1;
   
-      .comment-top {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.85rem;
-        color: gray;
-        margin-bottom: 5px;
-
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
-      }
-    }
-
-    .comment-text {
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin: 0;
-
-      @media (min-width: 768px) {
-        font-size: 1.05rem;
-      }
-    }
-
-    .comment-content {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .comment-options {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      display: flex;
-      gap: 4px; 
-      
-      .comment-action-btn {
-        padding: 2px;
-        width: 28px;
-        height: 28px;
-      }
-    
-      .comment-action-btn mat-icon {
-        font-size: 16px; 
-      }  
-    }
-    @media (min-width: 768px) {
-      .comment-top {
-        font-size: 5rem;
-      }
+    @media (min-width: 1200px) {
+      font-size: 1.2rem;
     }
   }
 }

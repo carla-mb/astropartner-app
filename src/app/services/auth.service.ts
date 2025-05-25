@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { AuthDTO } from '../models/auth.dto';
@@ -15,7 +16,7 @@ export interface AuthService {
 export class AuthService {
   private apiUrl = 'https://astropartner-api.onrender.com/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // On successful login store access_token and userId in local storage
   login(auth: AuthDTO): Observable<AuthService> {
@@ -42,5 +43,6 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('access_token');
     localStorage.removeItem('userId');
+    this.router.navigate(['/home']);
   }  
 }

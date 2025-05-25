@@ -1,0 +1,16 @@
+<div class="moon-calendar">
+   <h2>Lunar Calendar</h2>
+   <p>Keep track of the moon’s phases for the next 14 days.</p>
+  <div class="scroll-container">
+    <div class="week-row" *ngFor="let week of tableData">
+      <div class="day-cell" *ngFor="let day of week">
+        <div class="date-label">
+          {{ day.label === 'Today' ? 'Today' : (day.label | date: 'dd/MM') }}
+        </div>
+        <div class="emoji" [matTooltip]="day.phase">
+          {{ phaseToEmoji(day.phase) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

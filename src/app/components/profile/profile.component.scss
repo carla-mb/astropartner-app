@@ -1,10 +1,8 @@
 .profile-container {
   margin: 0 20px;
 
-  // Hide buttons when opening mobile menu
-  :host-context(.menu-open) button {
-    pointer-events: none;
-    opacity: 0.3;
+  @media (min-width: 768px) {
+    margin: 0 0 50px;
   }
 
   .profile-title {
@@ -12,7 +10,9 @@
     font-size: 2rem;
     font-weight: bold;
     margin: 20px 0;
-    background-color: rgb(229, 235, 235);
+    background: linear-gradient(to right,rgba(225, 232, 240, 0.9),rgba(205, 220, 240, 0.7));
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
   }
 }
 
@@ -26,6 +26,22 @@
     justify-content: center;
     gap: 1rem;
     margin: 1rem 0;
+
+    button {
+      font-weight: bold;
+
+      &:hover {
+        background-color: rgba(83, 155, 237, 0.01);
+      }
+
+      @media (min-width: 768px) {
+        font-size: 0.9rem;
+      }
+
+      @media (min-width: 992px) {
+        font-size: 1rem;
+      }
+    }
   }
 
   /* Calendar section */
@@ -33,7 +49,9 @@
     display: flex;
     align-items: flex-start; 
     padding: 1rem;
-    background-color: #f7f9fa;
+    background-color: #f9fbfd; 
+    border: 1px solid rgba(83, 155, 237, 0.15);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 8px;
     margin: 2rem 3rem;
 
@@ -58,6 +76,10 @@
       h2 {
         margin: 0;
         font-size: 1.2rem;
+
+        @media (min-width: 992px) {
+          font-size: 1.4rem;
+        }
       }
 
       p {
@@ -74,14 +96,15 @@
     justify-content: space-between;
     align-items: flex-start; 
     margin: 0 50px 0 0;
-  }
-  
-  .card-section {
-    flex: 0 0 60%; 
-    margin-bottom: 0; 
-  }
-  
-  .calendar-section {
-    flex: 0 0 28%;
+
+    .card-section {
+      flex: 0 0 60%; 
+      margin-bottom: 0; 
+    }
+    
+    .calendar-section {
+      flex: 0 0 28%;
+      margin-top: 3rem;
+    }
   }
 }

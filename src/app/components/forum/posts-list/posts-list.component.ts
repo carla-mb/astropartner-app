@@ -8,6 +8,8 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator'; 
 import { MatButtonModule } from '@angular/material/button';
+import { getUserAvatar } from '../../../utils/avatar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-posts-list',
@@ -15,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MatCardModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIcon
   ],
   templateUrl: './posts-list.component.html',
   styleUrl: './posts-list.component.scss'
@@ -46,18 +49,20 @@ export class PostsListComponent implements OnInit {
   loadPosts(): void {
     this.postsService.getAllPosts().subscribe(
       (data: PostDTO[]) => {
-        this.posts = data.sort(
-          (a, b) => new Date(b.postDate).getTime() - new Date(a.postDate).getTime()
-        );
-  
-        // Reset the list
+        // Store raw posts from API
+        this.posts = data; 
+        
+        // Reset the list to prevent duplicate entries  
         this.paginatedPosts = [];
         let postsLoadedCount = 0;
+
         // Fetch username and zodiac sign for each post dynamically
         this.posts.forEach((post) => {
           if (post.userId) {
-            this.usersService.getUserById(post.userId).subscribe(
-              (user) => {
+            this.usersService.getUserById(post.userId).subscribe(user => {
+              this.postsService.getCommentsByPostId(post.postId!).subscribe(comments => {
+                (post as any).commentCount = comments.length;
+                
                 this.paginatedPosts.push({
                   post,
                   username: user.username,
@@ -65,19 +70,23 @@ export class PostsListComponent implements OnInit {
                 });
                 postsLoadedCount++;
   
-                // Check if all posts with userId have been loaded
+                // Check if all posts with userId have been fully loaded before sorting
                 if (postsLoadedCount === this.posts.filter(p => p.userId).length) {
-                  // Store the full list and update the initial view (first page)
+                  // Store the full list before applying pagination
                   this.fullPaginatedPosts = [...this.paginatedPosts];
-                  this.paginatedPosts = this.fullPaginatedPosts.slice(0, this.pageSize);
+                  // Sort posts by date and paginate the first page
+                  this.paginatedPosts = this.fullPaginatedPosts
+                    .sort((a, b) => new Date(b.post.postDate).getTime() - new Date(a.post.postDate).getTime())
+                    .slice(0, this.pageSize);
                 }
-              },
-              (error) => console.error('Error fetching user details:', error)
+              });
+            },
+              (err) => console.error('Error fetching user details:', err)
             );
           }
         });
       },
-      (error) => console.error('Error loading posts:', error)
+      (err) => console.error('Error loading posts:', err)
     );
   }
   
@@ -86,7 +95,6 @@ export class PostsListComponent implements OnInit {
     const endIndex = startIndex + event.pageSize;
     // Always slice from the full list of posts
     this.paginatedPosts = this.fullPaginatedPosts.slice(startIndex, endIndex);
-    // Update pageSize for consistency
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
   }
@@ -103,7 +111,9 @@ export class PostsListComponent implements OnInit {
     this.router.navigate(['/forum/post-detail', postId]); 
   }
 
-  getUserAvatar(zodiacSign: string): string {
-    return `/assets/images/zodiac/${zodiacSign}.png`; 
+  getUserAvatar = getUserAvatar;
+
+  getCommentCount(post: PostDTO): number {
+    return (post as any).commentCount || 0;
   }
 }

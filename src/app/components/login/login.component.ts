@@ -83,4 +83,11 @@ export class LoginComponent {
   goBack(): void {
     this.location.back(); 
   }
+
+  // Password field visibility
+  showPassword = false;
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
 }

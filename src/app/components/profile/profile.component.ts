@@ -53,10 +53,6 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onEdit() {
-    this.router.navigate(['/profile/edit']);
-  }
-
   onDelete() {
     const dialogRef = this.dialog.open(DeleteProfileComponent, {
       width: '300px'

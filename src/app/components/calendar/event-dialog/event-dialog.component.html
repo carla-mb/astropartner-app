@@ -1,25 +1,65 @@
 <h2 mat-dialog-title>{{ data.event ? 'Edit Event' : 'Add Event' }}</h2>
 <mat-dialog-content>
+  <form #eventForm="ngForm">
 
-  <mat-form-field appearance="fill" style="width: 100%;">
-    <mat-label>Event Title</mat-label>
-    <input matInput placeholder="Enter title" [(ngModel)]="eventData.title">
-  </mat-form-field>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Event Title</mat-label>
+      <input matInput
+             placeholder="Enter title"
+             [(ngModel)]="eventData.title"
+             name="title"
+             required>
+      <mat-error *ngIf="eventForm.controls['title']?.invalid && eventForm.controls['title']?.touched">
+        Event title is required
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" style="width: 100%;">
-    <mat-label>Start Date</mat-label>
-    <input matInput type="date" [(ngModel)]="startValue">
-  </mat-form-field>
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>Start Date</mat-label>
+      <input matInput [matDatepicker]="startPicker"
+             [(ngModel)]="startValue"
+             name="start"
+             required>
+      <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+      <mat-datepicker #startPicker></mat-datepicker>
+      <mat-error *ngIf="eventForm.controls['start']?.invalid && eventForm.controls['start']?.touched">
+        Start date is required
+      </mat-error>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" style="width: 100%;">
-    <mat-label>End Date</mat-label>
-    <input matInput type="date" [(ngModel)]="endValue">
-  </mat-form-field>
-  
+    <mat-form-field appearance="fill" style="width: 100%;">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="endPicker"
+             [(ngModel)]="endValue"
+             name="end"
+             required>
+      <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+      <mat-datepicker #endPicker></mat-datepicker>
+      <mat-error *ngIf="eventForm.controls['end']?.invalid && eventForm.controls['end']?.touched">
+        End date is required
+      </mat-error>
+    </mat-form-field>
+
+    <div style="margin: 16px 0 4px; font-weight: 500; color: rgba(0, 0, 0, 0.6);">
+      Select a color for your event:
+    </div>
+    <div class="color-picker-grid">
+      <div
+        *ngFor="let color of safePalette"
+        class="color-swatch"
+        [style.background]="color"
+        [class.selected]="colorValue === color"
+        (click)="colorValue = color">
+      </div>
+    </div>
+
+  </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onAddEvent()">
+  <!-- Display delete only in edit mode -->
+  <button *ngIf="data.event" mat-button color="warn" (click)="onDeleteEvent()">Delete</button>
+  <button mat-raised-button (click)="onAddOrUpdateEvent()" [disabled]="eventForm.invalid">
     {{ data.event ? 'Update' : 'Add Event' }}
   </button>
 </mat-dialog-actions>

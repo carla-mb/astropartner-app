@@ -18,7 +18,7 @@ html, body {
 
 @media (min-width: 576px) {
   #content-wrap {
-    margin: 0 10%;
+    margin: 0 7%;
   }
 }
 
@@ -29,6 +29,12 @@ html, body {
 }
 
 @media (min-width: 992px) {
+  #content-wrap {
+    margin: 0 10%;
+  }
+}
+
+@media (min-width: 1400px) {
   #content-wrap {
     margin: 0 15%;
   }

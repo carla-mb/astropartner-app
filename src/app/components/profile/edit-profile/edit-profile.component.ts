@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { RouterModule, Router } from '@angular/router';
-import { formatDateForAPI } from '../../../utils/format-date.utils';
+import { formatDateForAPI } from '../../../utils/date-formatting';
 
 @Component({
   selector: 'app-edit-profile',
@@ -33,6 +33,7 @@ export class EditProfileComponent implements OnInit {
   editForm: FormGroup;
   apiError: string | null = null;
   private userId: string | null = null;
+  private existingPassword!: string;
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +49,6 @@ export class EditProfileComponent implements OnInit {
           Validators.pattern('^[a-z][a-z0-9_]*$')
         ]
       ],
-      password: ['', [Validators.required, Validators.minLength(6)]],
       birthDate: ['', Validators.required],
     });
   }
@@ -58,9 +58,11 @@ export class EditProfileComponent implements OnInit {
     if (this.userId) {
       this.userService.getUserById(this.userId).subscribe({
         next: (data: UserDTO) => {
+          // Cache the current password from the fetched data.
+          this.existingPassword = data.password;
+
           this.editForm.patchValue({
             username: data.username.toLowerCase(),
-            password: '', 
             birthDate: formatDateForAPI(new Date(data.birthDate)),
           });
         },
@@ -69,18 +71,15 @@ export class EditProfileComponent implements OnInit {
         },
       });
     } else {
-      console.error('No userId found. Redirecting to login...');
+      console.error('No userId found. Redirecting to login.');
       this.router.navigate(['/login']);
     }
   }
 
   onSubmit(): void {
     if (!this.editForm.valid) return;
-    let { username, password, birthDate } = this.editForm.value;
-
-    // Normalize input values
+    let { username, birthDate } = this.editForm.value;
     username = username.trim();
-    password = password.trim();
 
     // Format birth date
     const rawDate = new Date(this.editForm.get('birthDate')?.value);
@@ -92,7 +91,7 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
-    const updatedUser = new UserDTO(username, password, birthDate, '');
+    const updatedUser = new UserDTO(username, this.existingPassword, birthDate, '');
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
       next: (response: any) => {

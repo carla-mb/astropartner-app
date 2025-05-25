@@ -1,47 +1,60 @@
 .calendar-container {
-  margin: 0 20px;
+  margin: 0 20px 50px;
 
-  // Hide buttons when opening mobile menu
-  :host-context(.menu-open) {
-    pointer-events: none;
-    opacity: 0.3;
+  @media (min-width: 768px) {
+    margin: 0 0 50px;
   }
 
   .title {
     padding-left: 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     margin: 20px 0;
-    background-color: rgb(229, 235, 235);
+    background: linear-gradient(to right,rgba(225, 232, 240, 0.9),rgba(205, 220, 240, 0.7));
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
   }
 
   .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    margin: 0 10px 20px;
+    font-size: 1rem;
+    margin: 0 0 20px;
   }
 
-  p {
-    font-style: italic; 
-    color: #888;
-  }
-
-  a {
-    font-weight: bold;
-    text-decoration: none;
-    color: red;
+  .prompt {
+    font-size: 0.9rem;
+    text-align: center;
   }
 }
 
-// Fullcalendar button overrides
-::ng-deep button.fc-next-button.fc-button.fc-button-primary {
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  margin-left: 0.5rem;
-}
-::ng-deep button.fc-prev-button.fc-button.fc-button-primary {
-  font-size: 0.8rem;
-  padding: 4px 8px;
-  margin-right: 0.5rem;
+.calendar-moon-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
+@media (min-width: 992px) {
+  .calendar-container {
+    .title {
+      font-size: 2rem;
+    } 
+    
+    .subtitle {
+      margin: 16px 0 20px 0;
+      font-size: 1.1rem;
+    }
+  }
+ 
+  .calendar-moon-wrapper {
+    flex-direction: row; 
+    align-items: flex-start;
+    gap: 1.8rem;
+  }
+  
+  .interactive-calendar {
+    width: 60%;
+  }
+
+  .moon-wrapper {
+    width: 40%;
+    margin: 90px auto 0; 
+  }
+}

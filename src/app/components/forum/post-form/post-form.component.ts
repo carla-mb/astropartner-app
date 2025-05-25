@@ -27,6 +27,7 @@ export class PostFormComponent implements OnInit {
   postForm: FormGroup;
   postId?: string;
   isEditMode = false;
+  originalPostDate?: Date;
 
   constructor(
     private fb: FormBuilder,
@@ -47,6 +48,7 @@ export class PostFormComponent implements OnInit {
     if (this.postId) {
       this.isEditMode = true;
       this.postService.getPostById(this.postId).subscribe(post => {
+        this.originalPostDate = post.postDate; 
         this.postForm.patchValue({
           postTitle: post.postTitle,
           postContent: post.postContent
@@ -58,16 +60,15 @@ export class PostFormComponent implements OnInit {
   onSubmit(): void {
     if (this.postForm.invalid) return;
 
-    const formValue = this.postForm.value;
     const post: PostDTO = {
-      postTitle: formValue.postTitle,
-      postContent: formValue.postContent,
-      postDate: new Date(),
+      postTitle: this.postForm.value.postTitle,
+      postContent: this.postForm.value.postContent,
+      postDate: this.isEditMode && this.originalPostDate ? this.originalPostDate : new Date(),
     };
 
     if (this.isEditMode && this.postId) {
       this.postService.updatePost(this.postId, post).subscribe(() => {
-        this.router.navigate(['/forum']);
+        this.router.navigate([`/forum/post-detail`, this.postId]);
       });
     } else {
       this.postService.createPost(post).subscribe(() => {

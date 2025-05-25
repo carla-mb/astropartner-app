@@ -4,6 +4,7 @@ import { HoroscopeService } from '../../../services/horoscope.service';
 import { UserDTO } from '../../../models/user.dto';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { getUserAvatar } from '../../../utils/avatar';
 
 @Component({
   selector: 'app-horoscope',
@@ -48,10 +49,5 @@ export class HoroscopeComponent {
     );
   }
 
-  getUserAvatar(zodiacSign?: string): string {
-    if (!zodiacSign) {
-      return '/assets/images/icons/avatar.png';
-    }
-    return `/assets/images/zodiac/${zodiacSign}.png`;
-  }
+  getUserAvatar = getUserAvatar;
 }

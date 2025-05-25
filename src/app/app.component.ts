@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(public router: Router) {}
 
-  hideLayoutRoutes = ['/', '/login', '/register', '/profile/edit', '/forum/post-form'];
+  hideLayoutRoutes = ['/', '/login', '/register', '/profile/edit', '/profile/edit-password', '/forum/post-form'];
 
   showLayout(): boolean {
     // Hide layout for exact matches and the specific post-form/edit route

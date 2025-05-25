@@ -1,5 +1,5 @@
-<div class="moon-phase">
-  <h2>Current Moon Phase</h2>
-  <img src="assets/images/moon-phases/moon-phase.png" alt="Moon icon"/>
-  <p>{{ currentMoonPhase }}</p>
+<div #moonContainer class="moon-phase">
+  <h2>Today's Moon Phase</h2>
+  <img [src]="currentMoonImage" alt="Moon animation">
+  <p>{{ currentMoonPhase }} {{ emoji }}</p>
 </div>

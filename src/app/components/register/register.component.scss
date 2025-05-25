@@ -15,12 +15,15 @@
 }
 
 .register-container {
-  width: 100%;
+  width: 75%;
   max-width: 400px;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  @media(min-width: 768px) {
+    width: 100%;
+  }
 }
 
 h2 {

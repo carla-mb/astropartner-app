@@ -1,20 +1,17 @@
 <div class="post-detail-container" *ngIf="post" [class.menu-open]="isMenuOpen">
-  <!-- Post Title Header -->
   <h1 class="post-title">{{ post.postTitle }}</h1>
 
-  <!-- Post Card -->
   <mat-card class="post-card">
     <div class="post-card-content">
-
       <div class="post-left">
         <div>
           <span class="post-username">{{ postUsername }}</span>
           <span class="post-date">{{ post.postDate | date:'dd/MM/yyyy' }}</span>
-          <img *ngIf="postZodiac" [src]="getUserAvatar(postZodiac)" alt="User avatar" class="post-avatar">
+          <img *ngIf="postZodiac"  class="post-avatar" [src]="getUserAvatar(postZodiac)" alt="User avatar">
         </div>
         <div class="owner-options" *ngIf="isAuthenticated && isOwner">
           <button mat-flat-button [matMenuTriggerFor]="ownerMenu">
-            Options
+            <mat-icon>more_vert</mat-icon>Options
           </button>
           <mat-menu #ownerMenu="matMenu">
             <button mat-menu-item (click)="editPost()">Edit</button>
@@ -29,44 +26,6 @@
     </div>
   </mat-card>
 
-  <!-- Comment form -->
-  <div class="comment-form-section">
-    <ng-container *ngIf="isAuthenticated; else loginPrompt">
-      <mat-form-field appearance="outline" class="comment-input">
-        <mat-label>Add a comment</mat-label>
-        <textarea matInput rows="3" [(ngModel)]="commentContent"></textarea>
-      </mat-form-field>
-      <div class="comment-form-actions">
-        <button mat-raised-button color="primary" (click)="submitComment()">COMMENT</button>
-        <button mat-button (click)="cancelComment()">CANCEL</button>
-      </div>
-    </ng-container>
-    <ng-template #loginPrompt>
-      <p>
-        You must be logged in to participate in the forum. Go to <a href="/login">Login</a>
-      </p>
-    </ng-template>
-  </div>
+  <app-comments-list [postId]="postId" [currentUserId]="currentUserId"></app-comments-list>
 
-  <!-- Comments -->
-  <div class="comments-list">
-    <div *ngFor="let commentData of comments" class="comment-card">
-      <img class="comment-avatar" [src]="getUserAvatar(commentData.zodiacSign)" alt="Avatar">
-      <div class="comment-content">
-        <div class="comment-top">
-          <span class="comment-username">{{ commentData.username }}</span>
-          <span class="comment-date">{{ commentData.comment.commentDate | date:'d/M/yyyy, H:mm' }}</span>
-        </div>
-        <p class="comment-text">{{ commentData.comment.commentContent }}</p>      
-      </div>
-      <div *ngIf="isAuthenticated && commentData.comment.userId === currentUserId" class="comment-options">
-        <button mat-icon-button class="comment-action-btn" (click)="editComment(commentData.comment.commentId!)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button class="comment-action-btn" (click)="deleteComment(commentData.comment.commentId!)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>  
-    </div>
-  </div>
 </div>

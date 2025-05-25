@@ -2,3 +2,23 @@ mat-form-field {
   display: block;
   margin-bottom: 1em;
 }
+
+.color-picker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+}
+
+.color-swatch.selected {
+  border: 2px solid #333;
+}

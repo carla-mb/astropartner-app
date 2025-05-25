@@ -3,25 +3,25 @@
   <div class="forum-body" [class.menu-open]="isMenuOpen">
 
     <div class="aside">
-      <p class="forum-subtitle">Your space for astrological discussions</p>
-      <button *ngIf="isAuthenticated" mat-flat-button color="primary" (click)="createPost()">
+      <p class="forum-subtitle">Your space for astrological discussions.</p>
+      <button *ngIf="isAuthenticated" mat-flat-button (click)="createPost()">
         Add a new post
       </button>
-      <p *ngIf="!isAuthenticated" style="font-style: italic;">
-        You must be logged in to participate in the forum. Go to <a href="/login">Login</a>
+      <p *ngIf="!isAuthenticated" class="prompt">
+        Please <a href="/login" class="main-link">Login</a> to participate in the Forum.
       </p>
     </div>
 
     <div class="posts-area">
-      <p class="recent-posts-title">
+      <h2 class="recent-posts-title">
         RECENT POSTS BY THE ASTROCOMMUNITY
-      </p>
+      </h2>
 
       <div class="posts-scroll">
         <div *ngFor="let data of paginatedPosts">
           <mat-card class="post-card" appearance="outlined">
             <div class="card-content">
-              <img [src]="getUserAvatar(data.zodiacSign)" alt="Zodiac avatar" class="avatar" />
+              <img class="avatar" [src]="getUserAvatar(data.zodiacSign)" alt="User avatar">
               <div class="post-content">
                 <h3 class="post-title">{{ data.post.postTitle }}</h3>
                 <p class="post-subtitle">
@@ -31,9 +31,13 @@
                   {{ data.post.postContent | slice:0:150 }}
                   <span *ngIf="data.post.postContent.length > 150">...</span>
                 </p>
-                <button mat-raised-button color="primary" (click)="viewPost(data.post.postId!)">
-                  Go to the post
-                </button>                
+                <div class="comment-count">
+                  <p><mat-icon class="comment-icon">comment</mat-icon> {{ getCommentCount(data.post) }}</p>
+                </div>
+                <button mat-raised-button (click)="viewPost(data.post.postId!)">
+                  <mat-icon>explore</mat-icon>
+                  Go to the post 
+                </button>            
               </div>
             </div>
           </mat-card>

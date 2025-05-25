@@ -25,8 +25,8 @@ export class MenuComponent {
   @Input() isOpen = false;
   @Output() menuClosed = new EventEmitter<void>();
 
+  isAuthenticated: boolean = false;
   isDesktop: boolean = window.innerWidth >= 768;
-  accessToken: string | null = null; 
 
   menuItems = [
     { label: 'Home', path: '/home' },
@@ -37,6 +37,10 @@ export class MenuComponent {
   ];
 
   constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isLoggedIn();
+  }
 
   // Dynamically check screen size when resizing
   @HostListener('window:resize', []) 
@@ -49,16 +53,11 @@ export class MenuComponent {
     this.router.navigate([item.path]);
   }
 
-  ngOnInit(): void {
-    this.accessToken = localStorage.getItem('access_token'); 
-  }
-
   logout(): void {
     this.authService.logout();
-    this.accessToken = null;
+    this.isAuthenticated = false;
     this.menuClosed.emit(); 
     window.location.reload();
-    this.router.navigate(['/home']);
   }
 
   // Check if viewport size is desktop

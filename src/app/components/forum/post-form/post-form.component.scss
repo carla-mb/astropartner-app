@@ -10,17 +10,26 @@
   align-self: flex-start;
   margin: 2rem;
   font-size: 0.9rem;
-  color: #1976d2;
   text-decoration: none;
 }
 
+.mat-mdc-button:not(:disabled) {
+    color: #1976d2;
+    &:hover {
+    background-color: rgba(25, 118, 210, 0.1);
+  }
+}
+
 .post-form-container {
-  width: 100%;
+  width: 75%;
   max-width: 400px;
   padding: 2rem;
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  @media(min-width: 768px) {
+    width: 100%;
+  }
 }
 
 h2 {

@@ -1,17 +1,26 @@
 <div class="calendar-container">
   <h1 class="title">Calendar</h1>
-  <p class="subtitle">
-    Personalize your lunar calendar with your own events.
-  </p>
-  
-  <div class="calendar-container">
-    <full-calendar [options]="calendarOptions"></full-calendar>
-    <ng-container *ngIf="!isAuthenticated">
-      <p>
-        (Calendar is view-only. Please <a routerLink="/login">Login</a> to add events.)
+  <div class="calendar-moon-wrapper">
+    <div class="interactive-calendar">
+      <p class="subtitle">
+        Personalize your calendar with your own events.
       </p>
-    </ng-container>
+      <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+      <ng-container *ngIf="!isAuthenticated">
+        <p class="prompt">
+          Calendar is view-only. Please <a routerLink="/login" class="main-link">Login</a> to add events.
+        </p>
+      </ng-container>
+      <ng-container *ngIf="isAuthenticated">
+    <p class="prompt">
+      Click on a day to add an event.
+    </p>
+  </ng-container>
+    </div>
+    <div class="moon-wrapper">
+      <app-moon-phases></app-moon-phases>
+    </div>
   </div>
   
-  <app-planned-events></app-planned-events>
+  <app-planned-events (manageEvent)="openEventDialog($event)"></app-planned-events>
 </div>

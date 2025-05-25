@@ -1,4 +1,148 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles and overrides */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
+
+*:not(.mat-icon):not(.fc-icon) {
+  font-family: 'Nunito', sans-serif !important;
+}
+
+/* Primary action buttons */
+button.mat-mdc-raised-button:not(:disabled),
+a.mat-mdc-raised-button:not(:disabled) {
+  color: white;
+  background-color: rgba(147, 87, 199, 1);
+
+  &:hover {
+    background-color: #7B1FA2;
+  }
+}
+
+/* Focus state on form fields */
+:root {
+  --mat-sys-primary: rgba(147, 87, 199, 1);
+}
+
+/* Flat buttons (mat-flat-button) navigation */
+button.mat-mdc-unelevated-button:not(:disabled) {
+  color: white;
+  background-color: rgba(155, 42, 155, 1);
+
+  &:hover {
+    background-color: #7B1FA2;
+  }
+}
+
+/* Secondary buttons: cancel */
+button.mat-mdc-button:not(:disabled) {
+  color: #7B1FA2;
+
+  &:hover {
+    background-color: #F3E5F5;
+  }
+}
+
+/* Main links */
+.main-link {
+  color: rgba(147, 87, 199, 1);
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Form return links */
+.return-link.mat-mdc-button:not(:disabled) {
+  color: #1976d2;
+  &:hover {
+    background-color: rgba(25, 118, 210, 0.1);
+  }
+}
+
+/* Hide material buttons when opening mobile menu */
+body.menu-open button:not(.mobile-menu button):not(.mobile-menu *) {
+  pointer-events: none;
+  opacity: 0;
+}
+
+body.menu-open a[mat-button]:not(.mobile-menu a),
+body.menu-open a[mat-raised-button]:not(.mobile-menu a) {
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Hide calendar when opening mobile menu */
+body.menu-open .calendar-container {
+  pointer-events: none;
+  opacity: 0;
+}
+
+// Fullcalendar styles overrides
+button.fc-next-button.fc-button.fc-button-primary {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-left: 0.5rem;
+  background-color: rgba(155, 42, 155, 1);
+  border-color: #7B1FA2;
+
+  &:hover {
+    background-color: #7B1FA2;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 1rem;
+  }
+}
+
+button.fc-prev-button.fc-button.fc-button-primary {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-right: 0.5rem;
+  background-color: rgba(155, 42, 155, 1);
+  border-color: #7B1FA2;
+
+  &:hover {
+    background-color: #7B1FA2;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 1rem;
+  }
+}
+
+button.fc-today-button.fc-button.fc-button-primary {
+  font-size: 0.8rem;
+  padding: 4px 8px;  
+  background-color: rgba(155, 42, 155, 1);
+  border-color: #7B1FA2;
+  font-weight: 500;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: #7B1FA2;
+  }
+
+  &:disabled {
+    background-color: rgba(155, 42, 155, 0.3);
+    border-color: #7B1FA2;
+    color: #7B1FA2;
+  }
+}
+
+.interactive-calendar {
+  --fc-today-bg-color: rgba(155, 42, 155, 0.2); 
+
+  .fc-toolbar-title {
+    font-size: 1.4rem;
+
+    @media (min-width: 992px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 1rem;
+  }
+}

@@ -1,31 +1,67 @@
-<div class="home-page">
-  <ng-container *ngIf="isAuthenticated">
-    <app-horoscope [user]="currentUser"></app-horoscope>
-  </ng-container> 
+<div class="hero-banner">
+  <picture>
+    <source 
+      srcset=
+      "
+        assets/images/hero/starscape-sm.webp 600w,
+        assets/images/hero/starscape-md.webp 1000w,
+        assets/images/hero/starscape-lg.webp 1400w
+      "
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 85vw, 70vw"
+      type="image/webp" 
+    >
+    <img 
+      src="assets/images/hero/starscape-lg.jpg" 
+      alt="Starry night sky" 
+      class="hero-background" 
+      loading="lazy"
+    >
+  </picture>
 
-  <div *ngIf="!isAuthenticated" class="not-logged-in">
-    <p>Please <a routerLink="/login">log in</a> to see your horoscope and personalized details.</p>
+  <div class="hero-text">
+    <h1>AstroPartner</h1>
+    <p>Know what's ahead. Plan your path. Stay connected.</p>
   </div>
-  
-    <div class="navigation-cards">
-      <div class="navigation-card" routerLink="/profile">
-        <img src="/assets/images/icons/avatar.png" alt="Profile Icon" />
-        <h2>Profile</h2>
-        <p>Manage your profile and see your activity</p>
-      </div>
-      <div class="navigation-card" routerLink="/calendar">
-        <img src="/assets/images/icons/calendar.png" alt="Calendar Icon" />
-        <h2>Lunar & Personal Calendar</h2>
-        <p>Keep track of your upcoming events and moon phases</p>
-      </div>
-      <div class="navigation-card" routerLink="/forum">
-        <img src="/assets/images/icons/megaphone.png" alt="Forum Icon" />
-        <h2>Recent Posts</h2>
-        <p>Check out the latest posts in the forum</p>
-      </div>
+</div>
+
+<div class="home-page">
+  <section class="horoscope-section">
+    <ng-container *ngIf="isAuthenticated">
+      <app-horoscope [user]="currentUser"></app-horoscope>
+    </ng-container> 
+    <div *ngIf="!isAuthenticated" class="not-logged-in">
+      <p>Please <a routerLink="/login" class="main-link">Login</a> to see your horoscope and personalized details.</p>
     </div>
+  </section>
     
+  <section class="explore-section">
+    <h2>Let the Stars Guide You</h2>
+      <div class="navigation-cards" [ngClass]="{ 'two-elements': !isAuthenticated, 'three-elements': isAuthenticated }">
+        <ng-container *ngIf="isAuthenticated">
+          <div class="navigation-card" routerLink="/profile">
+            <img src="/assets/images/icons/avatar.png" alt="Profile Icon">
+            <h2>Profile</h2>
+            <p>Manage your profile and see your activity</p>
+          </div>
+        </ng-container>
+        <div class="navigation-card" routerLink="/calendar">
+          <img src="/assets/images/icons/calendar.png" alt="Calendar Icon">
+          <h2>Lunar & Personal Calendar</h2>
+          <p>Keep track of your upcoming events and moon phases</p>
+        </div>
+        <div class="navigation-card" routerLink="/forum">
+          <img src="/assets/images/icons/megaphone.png" alt="Forum Icon">
+          <h2>Recent Posts</h2>
+          <p>Check out the latest posts in the forum</p>
+        </div>
+      </div>
+  </section>
+
+  <section class="moon-section">
+    <div class="moon-intro">
+      <h2>In the Sky Right Now</h2>
+      <p>Follow the rhythm of the moon.</p>
+    </div>
     <app-moon></app-moon>
-  
- 
+  </section>
 </div>

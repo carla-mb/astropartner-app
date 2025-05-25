@@ -1,0 +1,67 @@
+.about-container {
+  text-align: justify;
+  margin: 0 20px 50px;
+
+  @media (min-width: 768px) {
+    margin: 0 0 50px;
+  }
+
+  .about-title {
+    padding-left: 20px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 20px 0;
+    background: linear-gradient(to right,rgba(225, 232, 240, 0.9),rgba(205, 220, 240, 0.7));
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+  }
+
+  .about-body {
+    margin: 30px 0;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+    
+    li {
+      padding-left: 8px;
+
+      &:not(:last-child) {
+        margin-bottom: 10px; 
+      }
+    }
+  }
+
+  .credits-list {
+    list-style-type: "\2728";
+  }
+
+  .icons-list {
+    list-style-type: "\1F52E";
+  }
+
+  @media (min-width: 992px) {
+    .about-title {
+      font-size: 2rem;
+    } 
+
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    p, ul {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+

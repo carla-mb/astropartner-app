@@ -25,13 +25,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   isMenuOpen = false;
   isDesktop: boolean = window.innerWidth >= 768;
-  accessToken: string | null = null; 
+  isAuthenticated: boolean = false;
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    // Dynamically check if the user is logged in
-    this.accessToken = this.authService.isLoggedIn() ? 'valid' : null;
+    this.isAuthenticated = this.authService.isLoggedIn();
   }
 
   @HostListener('window:resize')
@@ -51,8 +50,7 @@ export class HeaderComponent {
   
   logout(): void {
     this.authService.logout();
-    this.accessToken = null
+    this.isAuthenticated = false;
     window.location.reload();
-    this.router.navigate(['/home']);
   }
 }
