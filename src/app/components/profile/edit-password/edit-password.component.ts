@@ -54,12 +54,8 @@ export class EditPasswordComponent implements OnInit {
           this.existingUsername = data.username;
           this.existingBirthDate = data.birthDate;
         },
-        error: (err) => {
-          console.error('Error fetching user data:', err);
-        }
       });
     } else {
-      console.error('No userId found. Redirecting to login...');
       this.router.navigate(['/login']);
     }
   }
@@ -76,7 +72,6 @@ export class EditPasswordComponent implements OnInit {
     }
 
     if (!this.userId) {
-      console.error('User ID not found.');
       return;
     }
     // Construct an updated user object using the new password and the cached data
@@ -88,13 +83,11 @@ export class EditPasswordComponent implements OnInit {
     );
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
-      next: (response: any) => {
-        console.log('Password updated successfully:', response);
+      next: () => {
         this.router.navigate(['/profile']);
       },
       error: (err: any) => {
         this.apiError = 'Failed to update password. Please try again.';
-        console.error('Update error:', err);
       }
     });
   }

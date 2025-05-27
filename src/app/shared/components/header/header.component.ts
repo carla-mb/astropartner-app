@@ -6,7 +6,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router'; 
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +26,7 @@ export class HeaderComponent {
   isDesktop: boolean = window.innerWidth >= 768;
   isAuthenticated: boolean = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isLoggedIn();

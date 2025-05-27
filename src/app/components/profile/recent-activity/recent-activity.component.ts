@@ -46,11 +46,9 @@ export class RecentActivityComponent implements OnInit {
             next: (comments) => {
               (post as any).commentCount = comments.length;
             },
-            error: (err) => console.error(`Error fetching comments for post ${post.postId}:`, err)
           });
         });        
       },
-      error: (err) => console.error('Error fetching recent activity:', err)
     });
   }
 

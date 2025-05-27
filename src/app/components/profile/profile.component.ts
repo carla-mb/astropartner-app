@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit {
     // Retrieve current userId from local storage
     this.userId = localStorage.getItem('userId') ?? '';
     if (!this.userId) {
-      console.error('No userId found!');
       return;
     }
     this.loadUser();
@@ -49,7 +48,6 @@ export class ProfileComponent implements OnInit {
   loadUser() {
     this.userService.getUserById(this.userId).subscribe({
       next: (userData) => this.user = userData,
-      error: (err) => console.error('Error getting user data: ', err)
     });
   }
 
@@ -63,9 +61,8 @@ export class ProfileComponent implements OnInit {
         this.userService.deleteUser(this.userId).subscribe({
           next: () => {
             this.authService.logout();
-            this.router.navigate(['/home']);
+            window.location.reload();
           },
-          error: (err) => console.error('Error during deletion: ', err)
         });
       } 
     });

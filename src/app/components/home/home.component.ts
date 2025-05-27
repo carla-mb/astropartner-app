@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
           (userData: UserDTO) => {
             this.currentUser = userData;
           },
-          err => console.error('Error fetching user details', err)
         );
       }
     }

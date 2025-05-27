@@ -10,6 +10,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { getUserAvatar } from '../../../utils/avatar';
 import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-posts-list',
@@ -18,7 +19,8 @@ import { MatIcon } from '@angular/material/icon';
     MatCardModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatIcon
+    MatIcon, 
+    MatProgressSpinner
   ],
   templateUrl: './posts-list.component.html',
   styleUrl: './posts-list.component.scss'
@@ -81,12 +83,10 @@ export class PostsListComponent implements OnInit {
                 }
               });
             },
-              (err) => console.error('Error fetching user details:', err)
             );
           }
         });
       },
-      (err) => console.error('Error loading posts:', err)
     );
   }
   

@@ -76,15 +76,12 @@ export class RegisterComponent {
     const newUser = new UserDTO(username, password, birthDate, '');
 
     this.userService.register(newUser).subscribe({
-      next: (response: any) => {
-        console.log('User created successfully:', response);
+      next: () => {
         this.router.navigate(['/login']);
       },
       error: (err: any) => {
         if (err.status === 400 && err.error.message === 'Username already exists') {
           this.registerForm.get('username')?.setErrors({ usernameExists: true });
-        } else {
-          console.error('An unexpected error occurred:', err);
         }
       }
     });    

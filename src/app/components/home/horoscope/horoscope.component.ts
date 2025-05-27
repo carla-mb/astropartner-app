@@ -45,7 +45,6 @@ export class HoroscopeComponent {
         const index = day % messageCount;
         this.randomMessage = data.messages[index];
       },
-      err => console.error('Error fetching horoscope:', err)
     );
   }
 

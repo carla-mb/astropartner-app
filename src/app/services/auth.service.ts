@@ -26,7 +26,6 @@ export class AuthService {
         localStorage.setItem('userId', token.userId); 
       }),
       catchError((err) => {
-        console.error('Login error:', err);
         return throwError(() => err);
       })
     );

@@ -15,7 +15,6 @@ export class UserService {
   register(user: UserDTO): Observable<UserDTO> {
     return this.http.post<UserDTO>(this.apiUrl, user).pipe(
       catchError(err => {
-        console.error('Registration error:', err);
         return throwError(() => err);
       })
     );
@@ -28,7 +27,6 @@ export class UserService {
   updateUser(userId: string, user: UserDTO): Observable<UserDTO> {
     return this.http.put<UserDTO>(`${this.apiUrl}/${userId}`, user).pipe(
       catchError((err) => {
-        console.error('Error updating user:', err);
         return throwError(() => err);
       })
     );
@@ -37,7 +35,6 @@ export class UserService {
   deleteUser(userId: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${userId}`).pipe(
       catchError((err) => {
-        console.error('Error deleting user:', err);
         return throwError(() => err);
       })
     );

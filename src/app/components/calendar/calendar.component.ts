@@ -78,7 +78,6 @@ export class CalendarComponent implements OnInit {
           color: e.color || '#9357c7'
         }));
       },
-      err => console.error('Error loading events:', err)
     );
   }
 
@@ -101,7 +100,6 @@ export class CalendarComponent implements OnInit {
         };
         this.eventService.newEvent(newEvent).subscribe(
           () => this.loadEvents(),
-          err => console.error('Error creating event:', err)
         );
       }
     });
@@ -134,7 +132,6 @@ export class CalendarComponent implements OnInit {
       if (result.action === 'delete') {
         this.eventService.deleteEvent(eventData.eventId!).subscribe(
           () => this.loadEvents(),
-          err => console.error(err)
         );
       } else if (result.action === 'update') {
         const updated: EventDTO = {
@@ -143,7 +140,6 @@ export class CalendarComponent implements OnInit {
         };
         this.eventService.updateEvent(eventData.eventId!, updated).subscribe(
           () => this.loadEvents(),
-          err => console.error(err)
         );
       }
     });

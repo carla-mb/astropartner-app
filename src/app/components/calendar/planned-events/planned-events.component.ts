@@ -64,7 +64,6 @@ export class PlannedEventsComponent implements OnInit {
           })
           .slice(0, 6);
       },
-      err => console.error('Error loading events:', err)
     );
   }
 

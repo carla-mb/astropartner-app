@@ -66,12 +66,8 @@ export class EditProfileComponent implements OnInit {
             birthDate: formatDateForAPI(new Date(data.birthDate)),
           });
         },
-        error: (err) => {
-          console.error('Error fetching user data:', err);
-        },
       });
     } else {
-      console.error('No userId found. Redirecting to login.');
       this.router.navigate(['/login']);
     }
   }
@@ -87,15 +83,13 @@ export class EditProfileComponent implements OnInit {
 
     // Check that userId is available to proceed
     if (!this.userId) {
-      console.error('User ID not found.');
       return;
     }
 
     const updatedUser = new UserDTO(username, this.existingPassword, birthDate, '');
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
-      next: (response: any) => {
-        console.log('Profile updated successfully:', response);
+      next: () => {
         this.router.navigate(['/profile']);
       },
       error: (err: any) => {        
@@ -103,7 +97,6 @@ export class EditProfileComponent implements OnInit {
           this.editForm.get('username')?.setErrors({ usernameExists: true });
         } else {
           this.apiError = 'Failed to update profile. Please try again.';
-          console.error('Update error:', err);
         }
       },
     });

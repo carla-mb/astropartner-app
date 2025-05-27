@@ -73,7 +73,6 @@ export class MoonComponent implements OnInit, AfterViewInit, OnDestroy {
           this.updateMoonPhase(todayMoonPhase);
         },
         (err) => {
-          console.error('Error fetching moon phase:', err);
           this.currentMoonPhase = 'Unknown Phase'; 
         }
       );

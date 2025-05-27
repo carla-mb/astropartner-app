@@ -59,9 +59,4 @@ export class MenuComponent {
     this.menuClosed.emit(); 
     window.location.reload();
   }
-
-  // Check if viewport size is desktop
-  isDesktopView(): boolean {
-    return window.innerWidth >= 768;
-  }
 }
