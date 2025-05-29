@@ -86,7 +86,7 @@ export class EditPasswordComponent implements OnInit {
       next: () => {
         this.router.navigate(['/profile']);
       },
-      error: (err: any) => {
+      error: () => {
         this.apiError = 'Failed to update password. Please try again.';
       }
     });
