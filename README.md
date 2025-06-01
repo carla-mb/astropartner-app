@@ -2,6 +2,20 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.2.
 
+AstroPartner is an integrated web application that brings together a personalized daily horoscope, personal and lunar calendars, and a dynamic forum for user interaction. 
+
+## API Connection
+
+The app is configured to operate directly with the deployed [AstroPartner API](https://astropartner-api.onrender.com/). No local backend setup is needed.
+
+_Note: The API may take up to one minute to activate if it has been idle for more than 15 minutes._
+
+## Project setup
+
+```bash
+$ npm install
+```
+
 ## Development server
 
 To start a local development server, run:
